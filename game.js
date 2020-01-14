@@ -67,7 +67,6 @@
         else{
         c.clearRect(0, 0, canvasWidth, canvasHeight);
         physics()
-        score++
         ballBounce()
         createChar()
        if(Math.abs(u.x-ball1.x)<ball1.radius&&Math.abs(u.y-ball1.y)<ball1.radius){
