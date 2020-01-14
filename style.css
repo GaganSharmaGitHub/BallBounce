@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    background-image:url("./treebg.png");
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: repeat-x;
+    transition: background-image 2s ease;
+}
+canvas{
+    border: 4px white solid;
+    display: inline-block;
+}
+#gameData{
+    display: inline-block;
+    background-color: white;
+    float: right;
+    width: 25%;
+    height: 95%;
+    align-content: center;
+    text-align: center;
+    font-size: x-large;
+}
+
+#profileDiv{padding: 20px;}
+#game{height: 100vh;
+overflow: hidden;}
+
+
+.red #outlineProfile *{
+    fill: #eb4d4b;
+}
+.red #colorProfile *{
+    fill: #fa8c8c;
+}
+.blue #outlineProfile *{
+    fill: #4834d4;
+}
+.blue #colorProfile *{
+    fill: #9799e7;
+}
