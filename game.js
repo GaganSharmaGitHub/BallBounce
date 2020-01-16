@@ -3,7 +3,7 @@
      //circle
      function pokemon(x,y,rad,fill){
         c.translate(x, y);
-        c.drawImage(fill, -rad, -rad,2*rad,2*rad)
+        c.drawImage(pokeBall, -rad, -rad,2*rad,2*rad)
         c.setTransform(1, 0, 0, 1, 0, 0)
         }
     
@@ -38,8 +38,8 @@
     //resources
     var score= 0;
     var u=new character(50,50,100,100,0,0,"blue");
-    var gravity=0
-    var gravityDir=5//0=down,1=up,2=left,3=right,5=float
+    var gravity=1
+    var gravityDir=4//0=down,1=up,2=left,3=right,5=float
     var pause=true
     var d = new Date();
     var time=0;
@@ -92,22 +92,22 @@
     function createChar(p){
         characterDraw(u)
         if(u.x<=0){
-        u.dx=10    
+        u.dx=Math.abs(u.dx) 
         }
         if(u.x+u.width>canvasWidth){
-            u.dx=-10
+            u.dx=-Math.round(0.9*Math.abs(u.dx))
         }
         if(u.y<0){
         u.dy=10}
         if(u.y+u.height>canvasHeight){
-            u.dy=-10}
+            u.dy=-Math.round(0.9*Math.abs(u.dy))}
         u.x+=u.dx
         u.y+=u.dy
     }
     function physics(){
         //gravity
-        
-            u.dy+=gravity
+        if(gravityDir==4){
+            u.dy+=gravity}
         //friction
         u.dx=Math.round(0.7*u.dx)
         u.dy=Math.round(0.7*u.dy)
@@ -129,13 +129,14 @@
               if(gravityDir!=2){u.dx=-12;}
             break;
             case 38:// up key
-            if(gravityDir!=0){u.dy=-12;}
+            if(gravityDir!=0){
+                u.dy=-12;}
             break;
             case 39:// right key
             if(gravityDir!=3){u.dx=12}
             break;  
-            case 40:// right key
-            if(gravityDir!=1){u.dy=12}
+            case 40:// down key
+            if(gravityDir!=4){u.dy=12}
             break;
           }   
         }
