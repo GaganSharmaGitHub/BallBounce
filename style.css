@@ -9,6 +9,12 @@ canvas{
     border: 4px white solid;
     display: inline-block;
 }
+#pokeBall{
+    background-color: red;
+}
+#rsrc{
+    display: none;
+}
 #gameData{
     display: inline-block;
     background-color: white;
@@ -19,7 +25,7 @@ canvas{
     text-align: center;
     font-size: x-large;
     background-image: url("Wavesvg.svg");
-background-position: 0% 0%;
+background-position-x: 0%;
 background-repeat: repeat-x;
 transition: background-position 3s ease;
 animation: water 50s infinite alternate;

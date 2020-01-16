@@ -1,40 +1,32 @@
 //functions
 
      //circle
-     function circle(x,y,rad,fill,color,lineWidth){
+     function pokemon(x,y,rad,fill){
         c.translate(x, y);
-        c.beginPath()
-        c.lineWidth=lineWidth
-        c.arc(0,0,rad,0,Math.PI*2,false)
-        c.fillStyle=fill
-        c.fill()
-        c.strokeStyle=color
-        c.stroke()
+        c.drawImage(fill, -rad, -rad,2*rad,2*rad)
         c.setTransform(1, 0, 0, 1, 0, 0)
         }
     
     function drawBall(x){
-       circle(x.x,x.y,x.radius,x.fill,x.color,x.lineWidth)
+       pokemon(x.x,x.y,x.radius,x.fill)
         }
     //classes
-    function Ball(x,y,radius,color,fill,dx,dy,lineWidth){
+    function Ball(x,y,radius,fill,dx,dy){
         this.x=x
         this.y=y
         this.dx=dx
         this.dy=dy
-        this.color=color||"black"
         this.fill=fill
         this.radius=radius
-        this.lineWidth=lineWidth
     }
-    function character(height,width,x,y,dx,dy,color){
+    function character(height,width,x,y,dx,dy,fill){
         this.height=height
         this.width=width
         this.x=x
-        this.y=y||canvasHeight
+        this.y=y
         this.dx=dx||0
         this.dy=dy||0
-        this.color=color||"red"
+        this.fill=fill
     }
     //defining canvas
     const canvasHeight=Math.round(0.8*screen.availHeight)
@@ -44,9 +36,6 @@
     canvas.width=canvasWidth;
     const c= canvas.getContext('2d')
     //resources
-    
-    //objects
-    var ball1=new Ball(Math.round(Math.random()*(canvasWidth-100)+60),Math.round(Math.random()*(canvasHeight-30)),30,"black","gray",10,4,5)
     var score= 0;
     var u=new character(50,50,100,100,0,0,"blue");
     var gravity=0
@@ -56,10 +45,16 @@
     var time=0;
     const t0 = d.getTime();
     var previousLevel=0
+    var pokeBall = document.getElementById("pokeBall");
+    
+    //objects
+    var ball1=new Ball(Math.round(Math.random()*(canvasWidth-100)+60),Math.round(Math.random()*(canvasHeight-30)),30,pokeBall,4,4)
     //execution
     function animate(){
         if(pause){
             window.addEventListener("keydown", function(event){if(event.keyCode==32){pause=false;return}} ,true)
+            c.font = "50px Georgia"
+            c.fillText("Paused!",canvasWidth/2,100)
             }
         else{
         c.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -73,6 +68,7 @@
             if(previousLevel!=Math.round(level())){
              var ch= levelUp(Math.round(level()))
              levelUp(ch)}
+             levelRise(level()-Math.floor(level()))
             updateScore()
         d = new Date()
         time=d.getTime()-t0
@@ -95,12 +91,16 @@
     }
     function createChar(p){
         characterDraw(u)
-        if(u.x+u.width>canvasWidth||u.x<=0){
-        u.dx=-u.dx    
+        if(u.x<=0){
+        u.dx=10    
         }
-        if(u.y+u.height>canvasHeight||u.y<0){
-        u.dy=-u.dy}
-        
+        if(u.x+u.width>canvasWidth){
+            u.dx=-10
+        }
+        if(u.y<0){
+        u.dy=10}
+        if(u.y+u.height>canvasHeight){
+            u.dy=-10}
         u.x+=u.dx
         u.y+=u.dy
     }
@@ -181,9 +181,9 @@ animate()
 
 animate()
 function levelRise(x)  
-    {
-        document.getElementById("gameData").style.backgroundPositionY=(x-100)+"%"
-        return x
+    {var risepercent=-Math.round((1-x)*100)
+        document.getElementById("gameData").style.backgroundPositionY=risepercent+"%"
+        console.log("rise"+risepercent)
     }
     function test()
     {score++}
