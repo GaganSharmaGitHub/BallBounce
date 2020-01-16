@@ -1,6 +1,3 @@
-
-
-
 //functions
 
      //circle
@@ -53,8 +50,8 @@
     var score= 0;
     var u=new character(50,50,100,100,0,0,"blue");
     var gravity=0
-    var gravityDir=0//0=down,1=up,2=left,3=right,5=float
-    var pause=false
+    var gravityDir=5//0=down,1=up,2=left,3=right,5=float
+    var pause=true
     var d = new Date();
     var time=0;
     const t0 = d.getTime();
@@ -62,7 +59,7 @@
     //execution
     function animate(){
         if(pause){
-            window.addEventListener("keydown", function(event){if(event.keyCode=32){pause=false;return}} ,true)
+            window.addEventListener("keydown", function(event){if(event.keyCode==32){pause=false;return}} ,true)
             }
         else{
         c.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -112,8 +109,8 @@
         
             u.dy+=gravity
         //friction
-        u.dx=Math.round(0.9*u.dx)
-        u.dy=Math.round(0.9*u.dy)
+        u.dx=Math.round(0.7*u.dx)
+        u.dy=Math.round(0.7*u.dy)
     }
     //rectangle
     function characterDraw(p){
@@ -129,16 +126,16 @@
             case 32://space
             pause=true 
             case 37:// left key
-              if(gravityDir!=2){u.dx=-6;}
+              if(gravityDir!=2){u.dx=-12;}
             break;
             case 38:// up key
-            if(gravityDir!=0){u.dy=-5;}
+            if(gravityDir!=0){u.dy=-12;}
             break;
             case 39:// right key
-            if(gravityDir!=3){u.dx=6}
+            if(gravityDir!=3){u.dx=12}
             break;  
             case 40:// right key
-            if(gravityDir!=1){u.dy=6}
+            if(gravityDir!=1){u.dy=12}
             break;
           }   
         }
@@ -165,9 +162,31 @@
         document.getElementById("body").style.backgroundImage = "url(./retro.jpg)"; }
     }
 animate()
+ function   levelUp(x){
+     document.getElementById("levelUpAudio").play()
+     console.log(x)
+     if(x==3){
+       document.getElementById("area").style.backgroundImage = "url(./city.jpg)"
+   } 
+   if(x==5){
+        ball1.fill="red"}
+    if(x==9){
+        document.getElementById("area").style.backgroundImage = "url(./retro.jpg)" }
+    if(x==12){
+           ball1.radius=Math.round(0.6*ball1.radius) }
     
-    
-    
+    if(x==16){
+        document.getElementById("area").style.backgroundImage = "url(./bg.jpg)"}}
+
+
+animate()
+function levelRise(x)  
+    {
+        document.getElementById("gameData").style.backgroundPositionY=(x-100)+"%"
+        return x
+    }
+    function test()
+    {score++}
     
     
     //demo

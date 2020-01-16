@@ -4,12 +4,7 @@ body{
     width: 100vw;
     height: 100vh;
     background-color: black;
-    background-image:url("./treebg.png");
-    overflow: hidden;
-    background-size: cover;
-    background-repeat: repeat-x;
-    transition: background-image 2s ease;
-}
+   }
 canvas{
     border: 4px white solid;
     display: inline-block;
@@ -23,13 +18,44 @@ canvas{
     align-content: center;
     text-align: center;
     font-size: x-large;
+    background-image: url("Wavesvg.svg");
+background-position: 0% 0%;
+background-repeat: repeat-x;
+transition: background-position 3s ease;
+animation: water 50s infinite alternate;
 }
+#area{
+    background-image:url("./treebg.png");
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: repeat-x;
+    transition: background-image 2s ease;
 
+}
+#gameData:hover {
+    background-position: 10% -10%;
+  }
 #profileDiv{padding: 20px;}
 #game{height: 100vh;
 overflow: hidden;}
-
-
+@keyframes water{
+    from{
+        background-position-x: 500%;
+    }
+    to{
+        background-position-x: -500%;
+    }
+}
+#popUp{
+    position: absolute;
+    width:100vw;
+    height: 100vh;
+    background-color: white;
+    top: 0px;
+    bottom: 0px;
+    z-index: 50;
+    
+}
 .red #outlineProfile *{
     fill: #eb4d4b;
 }
